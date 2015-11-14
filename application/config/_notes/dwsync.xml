@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="autoload.php" server="ssh.pref.menu//public_html/staging/" local="130888874943622359" remote="130890730200000000" Dst="0" />
+<file name="config.php" server="ssh.pref.menu//public_html/staging/" local="130891338467178080" remote="130890907200000000" Dst="0" />
+<file name="doctypes.php" server="ssh.pref.menu//public_html/staging/" local="130888616028486710" remote="130888204800000000" Dst="0" />
+<file name="database.php" server="ssh.pref.menu//public_html/staging/" local="130909698260676818" remote="130909266000000000" Dst="0" />
+<file name="constants.php" server="ssh.pref.menu//public_html/staging/" local="130899143505707070" remote="130898711400000000" Dst="0" />
+<file name="foreign_chars.php" server="ssh.pref.menu//public_html/staging/" local="130888616029110711" remote="130888204800000000" Dst="0" />
+<file name="hooks.php" server="ssh.pref.menu//public_html/staging/" local="130888616029578712" remote="130888204800000000" Dst="0" />
+<file name="index.html" server="ssh.pref.menu//public_html/staging/" local="130888616029890713" remote="130888204800000000" Dst="0" />
+<file name="memcached.php" server="ssh.pref.menu//public_html/staging/" local="130888616030202713" remote="130888204800000000" Dst="0" />
+<file name="migration.php" server="ssh.pref.menu//public_html/staging/" local="130888616030514714" remote="130888204800000000" Dst="0" />
+<file name="mimes.php" server="ssh.pref.menu//public_html/staging/" local="130888616030826714" remote="130888204800000000" Dst="0" />
+<file name="profiler.php" server="ssh.pref.menu//public_html/staging/" local="130888616031138715" remote="130888204800000000" Dst="0" />
+<file name="routes.php" server="ssh.pref.menu//public_html/staging/" local="130888616031450715" remote="130888204800000000" Dst="0" />
+<file name="smileys.php" server="ssh.pref.menu//public_html/staging/" local="130888616031762716" remote="130888204800000000" Dst="0" />
+<file name="user_agents.php" server="ssh.pref.menu//public_html/staging/" local="130888616032230717" remote="130888204800000000" Dst="0" />
+<file name="autoload.php" server="ssh.pref.menu//public_html/" local="130888874943622359" remote="130898509800000000" Dst="0" />
+<file name="constants.php" server="ssh.pref.menu//public_html/" local="130899143505707070" remote="130898740800000000" Dst="0" />
+<file name="database.php" server="ssh.pref.menu//public_html/" local="130909698260676818" remote="130916945400000000" Dst="0" />
+<file name="doctypes.php" server="ssh.pref.menu//public_html/" local="130888616028486710" remote="130898509800000000" Dst="0" />
+<file name="config.php" server="ssh.pref.menu//public_html/" local="130891338467178080" remote="130898509800000000" Dst="0" />
+<file name="foreign_chars.php" server="ssh.pref.menu//public_html/" local="130888616029110711" remote="130898509800000000" Dst="0" />
+<file name="hooks.php" server="ssh.pref.menu//public_html/" local="130888616029578712" remote="130898509800000000" Dst="0" />
+<file name="index.html" server="ssh.pref.menu//public_html/" local="130888616029890713" remote="130898509800000000" Dst="0" />
+<file name="memcached.php" server="ssh.pref.menu//public_html/" local="130888616030202713" remote="130898509800000000" Dst="0" />
+<file name="migration.php" server="ssh.pref.menu//public_html/" local="130888616030514714" remote="130898509800000000" Dst="0" />
+<file name="mimes.php" server="ssh.pref.menu//public_html/" local="130888616030826714" remote="130898509800000000" Dst="0" />
+<file name="profiler.php" server="ssh.pref.menu//public_html/" local="130888616031138715" remote="130898509800000000" Dst="0" />
+<file name="routes.php" server="ssh.pref.menu//public_html/" local="130888616031450715" remote="130898509800000000" Dst="0" />
+<file name="smileys.php" server="ssh.pref.menu//public_html/" local="130888616031762716" remote="130898509800000000" Dst="0" />
+<file name="user_agents.php" server="ssh.pref.menu//public_html/" local="130888616032230717" remote="130898509800000000" Dst="0" />
+</dwsync>
