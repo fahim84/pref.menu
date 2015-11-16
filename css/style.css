@@ -83,7 +83,7 @@ a {
 .header {
 	height:920px;
 	display:block;
-	background: url(../images/banner.jpg?v=7) no-repeat top center; 
+	background: url(../images/banner.jpg) no-repeat top center; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -977,7 +977,9 @@ h2.error {
 		width:95%;
 	}
 	.header {
-		background:url(../images/banner-tablet.jpg) 100% 100% top left no-repeat;
+		background: url(../images/banner-tablet.jpg); 
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 	}
 	.login-box {
 		width:45%;
@@ -1125,7 +1127,9 @@ h2.error {
 		width:95%;
 	}
 	.header {
-		background:url(../images/banner-tablet.jpg) 100% 100% top left no-repeat;
+		background: url(../images/banner-mobile.jpg); 
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 	}
 	.login-box {
 		top:50px;
