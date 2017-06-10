@@ -106,12 +106,12 @@ if(ENVIRONMENT == 'production')
 }
 
 define('MAILER_NAME', 'Pref.Menu'); // mailer name
-define('MAILER_EMAIL', 'mailer@pref.menu'); // mailer email address
-define('MAILER_PASSWORD', 'mailer123'); // mailer password
+define('MAILER_EMAIL', 'admin@pref.menu'); // mailer email address
+define('MAILER_PASSWORD', 'Admin@123'); // mailer password
 
 define("ADMIN_EMAIL", "admin@pref.menu");
 define("SYSTEM_NAME", "Pref.Menu");
-define("SYSTEM_EMAIL", "no-reply@Pref.menu");
+define("SYSTEM_EMAIL", "admin@pref.menu");
 define("EMAIL_NOTIFICATION_FOOTER", "Regards,<br />Pref Administrator");
 
 define("CONFIRMATION_MESSAGE", "ConfirmationMessage");

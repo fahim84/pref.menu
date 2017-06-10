@@ -15,7 +15,7 @@ $(document).ready(function(){
 		var windowpos = $(window).scrollTop();
 		
 		
-		gap_height = browser_width <= 1180 ? windowpos+400 : windowpos-survey_box_height;
+		gap_height = browser_width <= 1180 ? windowpos+450 : windowpos-survey_box_height;
 		
 		//s.html("Survey-Box: "+survey_box_height+ " <br>Distance from top:" + pos.top + "<br />Scroll position: " + windowpos + "<br>Browser Width: " + browser_width);
 		
@@ -126,11 +126,18 @@ $(document).on('click', '.OrderItem', function(){
 });
 
 $(document).on('submit', '#TakeOrderForm', function(){
+	var Table = $('#Table').val();
+	var temporary = $('#temporary').val();
+	
 	var Form = $('#TakeOrderForm').serialize();
 	$('#TakOrderError').html('Please wait...');
 	$.post(WEB_URL+"order/take_order", Form, function(Data, textStatus){
 			if(Data.Error==0)
 			{
+				if(temporary == 1)
+				{
+					window.location.href = WEB_URL+"order/make_feedback_for_single_table/?temporary="+temporary+"&Table="+Table;
+				}
 				$('.notification').html(Data.Msg);
 				ShowNotification();
 				$('#TakOrderError').html('&nbsp;');
@@ -146,6 +153,8 @@ $(document).on('submit', '#TakeOrderForm', function(){
 				// hide all MenuItem 
 				$('.MenuItem').hide();
 				$('#keyword').val('');
+				$('#hidden_table').val($('#Table').val());
+				$('#Table').val('');
 				$('#customerid').focus();
 				window.scrollTo(0, 0); // scroll top of the page.
 				
@@ -254,5 +263,16 @@ function display_search_result(category_id,item_id)
 	
 	$('#Record_'+item_id).focus();
 	$('#Record_'+item_id).effect("pulsate", {}, 1000);
+	
+
+	var windowHeight = $(window).height();
+	var elementHeight = $('#Record_'+item_id).height();
+	
+	var elementPosition = $('#Record_'+item_id).position();
+	var elementTop = elementPosition.top;
+	
+	var toScroll = (windowHeight / 2) - (elementHeight / 2);
+	
+	window.scroll(0,(elementTop - toScroll));
 }
 

@@ -22,6 +22,7 @@
                 <div class="fleft"></div>
                 <div class="clear"></div>
             </div>
+            <input type="hidden" name="ordering_feature" id="ordering_feature" value="0">
             <div class="reg-box">
               <div class="fleft" style="min-width:240px;">
                 I will use Pref for <span class="Mandatory">*</span><br />
@@ -107,8 +108,8 @@
 				if($profile['logo'] != '')
 				{
 					$Image = base_url().UPLOADS.'/'.$profile['logo'];
-					$Image = base_url()."thumb.php?src=".$Image."&w=200&h=200";
-					echo '<div><img src="'.$Image.'" class="menu-dish" /></div><br />';
+					//$Image = base_url()."thumb.php?src=".$Image."&w=200&h=200";
+					echo '<div><img src="'.$Image.'" class="menu-dish" width="230" /></div><br />';
 					echo "<label><input name=\"Delete1\" type=\"checkbox\" id=\"Delete1\" value=\"1\" />Delete<br>$profile[logo]</label><input name=\"oldfile\" type=\"hidden\" value=\"{$profile['logo']}\" /><br>";
 				}
 				?>

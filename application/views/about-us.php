@@ -14,7 +14,7 @@
     </div>
 </section>
 <?php
-$this->load->view('clients',$this->data);
+//$this->load->view('clients',$this->data);
 $this->load->view('footer_section',$this->data);
 $this->load->view('footer',$this->data);
 

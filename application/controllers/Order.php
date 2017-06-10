@@ -55,7 +55,7 @@ class Order extends CI_Controller
 		$order_timestamp = $this->input->get_post('order_timestamp');
 		$overwrite_table_number = $this->input->get_post('overwrite_table_number');
 		$Table = $this->input->get_post('Table');
-		$customerid = $this->input->get_post('customerid');
+		$customerid = 1;
 		$selecteditems = $this->input->get_post('selecteditems');
 		$temporary = $this->input->get_post('temporary');
 		$redirect_file = $this->input->get_post('redirect_file');
@@ -89,7 +89,7 @@ class Order extends CI_Controller
 			$Error=1;
 			$Msg='<div class="alert alert-error">Please select order items</div>';
 		}
-		elseif($this->order_model->check_existing_order_on_same_table($restaurant_id,$Table,$temporary,$order_timestamp))
+		/*elseif($this->order_model->check_existing_order_on_same_table($restaurant_id,$Table,$temporary,$order_timestamp))
 		{
 			$Error=1;
 			$action = 'hide confirm order button';
@@ -97,9 +97,21 @@ class Order extends CI_Controller
 			$Msg.='<div><input type="hidden" name="overwrite_table_number" value="'.$Table.'" >
 			<input type="submit" name="overwrite_button" id="overwrite_button" value="Yes Replace It" class="Button" style="background-color:#C30003;" />
 			<input type="button" name="overwrite_cancel" id="overwrite_cancel" value="No" class="Button" style="background-color:#C30003;" /></div><br>';
-		}
+		}*/
 		else
 		{
+			if($this->order_model->check_existing_order_on_same_table($restaurant_id,$Table,$temporary,$order_timestamp))
+			{
+				$where_condition['DATE(date_created)'] = array("'".date('Y-m-d')."'",FALSE); // If you set it to FALSE, CodeIgniter will not try to protect your field or table names.
+				$where_condition['order_timestamp !='] = $order_timestamp;
+				$where_condition['review_done'] = 0;
+				$where_condition['restaurant_id'] = $restaurant_id;
+				$where_condition['table_number'] = $Table;
+				$where_condition['deleted'] = 0;
+				$where_condition['temporary'] = $temporary;
+				// delete existing orders
+				$this->order_model->update_orders($where_condition, array('deleted' => 1) );
+			}
 			
 			$Error=0;
 			$Msg='';
@@ -137,7 +149,7 @@ class Order extends CI_Controller
 				$Count++;
 			}
 			//$_SESSION[USER_RETURN_MSG]['Msg']='Order(s) saved successfully!';
-			$Msg="Customer $customerid order saved";
+			$Msg="Table $Table order saved";
 			
 			$Url=base_url().$redirect_file."?Table=$Table";
 		}
@@ -188,7 +200,7 @@ class Order extends CI_Controller
 		}
 		reset_survey();
 		
-		$customerid = $this->input->get_post('customerid');
+		$customerid = 1;
 		$Table = $this->input->get_post('Table');
 		$selecteditems = $this->input->get_post('selecteditems');
 		$selecteditemsQuantity = $this->input->get_post('selecteditemsQuantity');
@@ -311,6 +323,10 @@ class Order extends CI_Controller
 		
 		$Table = $this->input->get_post('Table');
 		$temporary = $this->input->get_post('temporary');
+		if($Table == '')
+		{
+			$Table = $this->input->get_post('hidden_table') > 0 ? $this->input->get_post('hidden_table') : '';
+		}
 		
 		if($Table=='')
 		{
@@ -365,6 +381,12 @@ class Order extends CI_Controller
 				$Error=0;
 				$Msg = 'Order is ready for feedback.';
 			}
+		}
+		
+		if($Error == 0 and $temporary == 1)
+		{
+			redirect(base_url().'order/start_feedback/');
+			exit;
 		}
 		
 		$Return["Error"]=$Error;
@@ -435,6 +457,9 @@ class Order extends CI_Controller
 	
 	public function submit_feedback()
 	{
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		
 		$restaurant_id = $_SESSION[USER_LOGIN]['id'];
 		$rates = $this->input->get_post('rates');
 		$comments = $this->input->get_post('comments');
@@ -445,6 +470,7 @@ class Order extends CI_Controller
 		$ComeAgain = $this->input->get_post('ComeAgain');
 		$Member = $this->input->get_post('Member');
 		$suggestion = $this->input->get_post('suggestion');
+		$name = $this->input->get_post('name');
 		$Email = $this->input->get_post('Email');
 		$focus_element = '';
 		
@@ -528,6 +554,7 @@ class Order extends CI_Controller
 				$insert_data['restaurant_id'] = $restaurant_id;
 				$insert_data['order_id'] = $order_id;
 				$insert_data['table_number'] = $_SESSION[SURVEY_TABLE];
+				$insert_data['name'] = $name;
 				$insert_data['email'] = $Email;
 				$insert_data['region'] = ucfirst($Region);
 				$insert_data['hear_about_us'] = ucfirst($HearAboutUs);
@@ -571,6 +598,8 @@ class Order extends CI_Controller
 					
 					$message = ob_get_contents();
 					ob_end_clean();
+					
+					$this->load->library('email');
 					
 					# Send email to Signup User
 					$this->email->clear(TRUE);

@@ -2,31 +2,34 @@
 <section class="header header-report">
 	<?php $this->load->view('header_section',$this->data); ?>
 </section>
-
+<style>
+    .ui-menu-item,ui-state-focus{font-size: 22px;}
+</style>
 <section class="inner-page">
 	<div class="container">
     	<div class="content-page register-now menu-page" id="ShowForm">
-       	  <div class="fleft"><h2>Take Order</h2></div>
+       	  <div class="fleft"><h2>Setup Order</h2></div>
           <div class="fright"><?php client_logo(); ?></div>
           <div class="clear"></div>
           <form name="TakeOrderForm" id="TakeOrderForm" class="ac-custom ac-checkbox ac-checkmark" action="">
           <input type="hidden" name="temporary" id="temporary" value="0">
+                    <input name="customerid" type="hidden" id="customerid"  value="1" >
           <input type="hidden" name="order_timestamp" id="order_timestamp" value="<?php echo $order_timestamp; ?>">
           <input type="hidden" name="redirect_file" id="redirect_file" value="order/index/">
           <div class="feeback-option">
           <div class="fleft" style="width:200px;">
-          <select name="Table" required id="Table" style="width:200px;height:45px;padding:5px;font-size:20px;" >
+          <input type="hidden" name="hidden_table" id="hidden_table" value="0" >
+          <select name="Table" required id="Table" style="width:250px;height:50px;padding:5px;font-size:24px;" >
           	<option value="" >Select Table</option>
             <?php
 				foreach(get_tables() as $Key => $Value)
 				{
 					$selected = $Table == $Key ? 'selected="selected"' : '';
-					echo '<option value="'.$Key.'" '.$selected.' >Table '.$Key.'</option>';
+					echo '<option value="'.$Key.'" >Table '.$Key.'</option>';
 				}
 			?>
           </select>
           </div>
-          <input name="customerid" type="number" required="required" class="TextField" id="customerid" placeholder="Customer #" style="width:200px;" max="100" min="1" value="" >
           
           <div class="clear"></div>
           </div>
@@ -58,9 +61,9 @@
 							
 							# These variables will be use in jquery and json search function.
 							$items_tags_key = $last_category_id.'-'.$row_id;
-							$items_tags_val = $row->category. ' - ' . $row->menu_number . ' ' . $row->title;
+							$items_tags_val = $row->category. ' - ' . $row->title;
 							$items_tags[$items_tags_key] = $items_tags_val;
-							
+							$row->menu_number = ($row->menu_number == 10000 or $row->menu_number == 0) ? '' : '#'.$row->menu_number;
                 ?>
                 <tr class="MenuItem <?php echo $Class; ?> category_items_row_<?php echo $last_category_id; ?>" id="Record_<?php echo $row_id; ?>" catid="<?php echo $last_category_id; ?>" tabindex="<?php echo $i++; ?>" >
                   <td align="left">
@@ -68,7 +71,7 @@
                     	<tr>
                         	<td valign="top" width="10%"><div id="Item_<?php echo $row_id; ?>_image"><a href="<?php echo $image_url; ?>" data-lightbox="roadtrip" data-title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>"><img title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>" src="<?php echo $image; ?>" alt="dish" class="menu-dish" /></a></div></td>
                           <td align="left" valign="top" width="90%">
-                            <div class="title limit_title" id="Item_<?php echo $row_id; ?>_title"><span title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>">#<?php echo $row->menu_number; ?> <?php echo $row->title; ?></span><?php if($row->popular==1) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="Popular" /><?php } ?></div>
+                            <div class="title limit_title" id="Item_<?php echo $row_id; ?>_title"><span title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>"><?php echo $row->menu_number; ?> <?php echo $row->title; ?></span><?php if($row->popular==1) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="Popular" /><?php } ?></div>
                             
                             <div class="description" id="Item_<?php echo $row_id; ?>_desc"><?php echo $row->description; ?></div>
                             	
@@ -90,7 +93,7 @@
                             
                         </tr>
                         <tr>
-                        	<td align="center"><span class="price" id="Item_<?php echo $row_id; ?>_price"><?php echo CURRENCY." ".number_format($row->price); ?></span></td>
+                        	<td align="center"><span class="price" id="Item_<?php echo $row_id; ?>_price"><?php echo $row->price > 0 ? CURRENCY." ".number_format($row->price):'&nbsp;'; ?></span></td>
                             <td><input class="special_comment_textbox" type="text" name="request_comment[<?php echo $row_id; ?>]" id="Item_<?php echo $row_id; ?>_request_comment" value="" placeholder="Special Reqeust" onKeyUp="update_req_comm(this, '<?php echo $row_id; ?>');"  >
                             </td>
                         </tr>
@@ -120,10 +123,11 @@
             </div>
             
             	<div id="sticker" class="feedback-btn">
-                <div style="padding-top:5px;padding-bottom:5px;" >
-                    <input type="search" name="keyword" id="keyword" value="" placeholder="Search Items" class="TextField" style="width:280px; opacity:1.0;" >
-                </div>
                 <div class="price" id="TakOrderError"></div> 
+                <div style="padding-top:5px;padding-bottom:30px;" >
+                    <input type="search" name="keyword" id="keyword" value="" placeholder="Search Items" class="TextField" style="width:310px; opacity:1.0; font-size:22px; height:60px;" >
+                </div>
+                
                 <input type="submit" name="SubmitBtn" id="SubmitBtn" value="Confirm Order" class="Button" style="background-color:#C30003;" />
                 
                 </div>
@@ -139,6 +143,24 @@
 </section>
 <script src="<?php echo base_url(); ?>js/orders.js"></script>
 <script>
+$(document).on('change', '#Table', function(){
+
+	var table_number = $('#Table').val();
+
+	//var customerid = $('#customerid').val();
+
+	if(table_number > 0)
+
+	{
+		$('#keyword').focus();
+
+        //customerid > 0 ? $('#keyword').focus() : $('#customerid').focus();
+
+    }
+
+    //check_temporary_pending_orders(table_number);
+
+});
 
 var items_tags = <?php echo json_encode($items_tags); ?>;
 

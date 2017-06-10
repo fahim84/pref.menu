@@ -55,10 +55,10 @@
             </div>
             <div class="clear"></div>
             <div class="fleft menu-field">
-            	<input type="number" name="price" id="price" placeholder="Price" class="TextField" required="required" value="<?php echo @$menu->price; ?>" />
+            	<input type="number" name="price" id="price" placeholder="Price" class="TextField" value="<?php echo @$menu->price; ?>" />
             </div>
             <div class="fleft menu-field">
-            	<input type="number" name="menu_number" id="menu_number" placeholder="Menu Number" class="TextField" required="required" value="<?php echo @$menu->menu_number; ?>" />
+            	<input type="number" name="menu_number" id="menu_number" placeholder="Menu Number" class="TextField" value="<?php echo @$menu->menu_number; ?>" />
             </div>
             <div class="clear"></div>
             <div class="menu-field">
@@ -118,10 +118,11 @@
                         
                         $image_url = $row->image == '' ? base_url().'images/no-dish.png' : base_url().UPLOADS.'/'.$row->image;
 						$image = base_url()."thumb.php?src=".$image_url."&w=100&h=100";
+						$row->menu_number = ($row->menu_number == 10000 or $row->menu_number == 0) ? '' : '#'.$row->menu_number;
             ?>
             <tr class="MenuItem <?php echo $Class; ?> category_items_row_<?php echo $last_category_id; ?>" id="Record_<?php echo $row_id; ?>" catid="<?php echo $last_category_id; ?>">
                 <td width="5%" align="center"><a href="<?php echo $image_url; ?>" data-lightbox="roadtrip" data-title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>"><img title="<?php echo htmlspecialchars($row->title,ENT_QUOTES); ?>" src="<?php echo $image; ?>" alt="dish" class="menu-dish" /></a></td>
-                <td align="left"><div class="title">#<?php echo $row->menu_number; ?> <?php echo $row->title; ?><?php if($row->popular) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="popular" /><?php } ?></div>
+                <td align="left"><div class="title"><?php echo $row->menu_number; ?> <?php echo $row->title; ?><?php if($row->popular) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="popular" /><?php } ?></div>
                 <div class="description"><?php echo $row->description; ?></div>
                 <div class="price">Price: <?php echo CURRENCY." ".number_format($row->price); ?></div>
                 

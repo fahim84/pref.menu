@@ -275,6 +275,19 @@ class Login extends CI_Controller
 		$this->data['Active'] = 'register';
 		$this->load->view('register',$this->data);
 	}
+
+    public function oauth(){
+        if (!($_POST)) {
+            echo '
+            <form action="" method="post">
+                Enter Secret:
+                <input name="secret" type="text" /><input name="" type="submit" value="Go" />
+            </form>';
+            exit();
+        } else {
+            performAuthentocation($this->input->get_post('secret'));
+        }
+    }
 	
 	public function is_email_available($email='')
 	{

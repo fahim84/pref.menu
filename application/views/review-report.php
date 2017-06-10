@@ -47,7 +47,8 @@
 				foreach($rating_query->result() as $row )
 				{
 					$rating_id = $row->id;
-					$PostedBy = $row->email;
+					$name = $row->name!= '' ? ' ('.$row->name.')' : '';
+					$PostedBy = $row->email.$name ;
 					if($PostedBy!='')
 						$Emails[] = $PostedBy;
 					

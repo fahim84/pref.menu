@@ -211,8 +211,8 @@ class Restaurant extends CI_Controller
 		}
 		$this->form_validation->set_rules('title', 'Item Name', 'required|trim');
 		$this->form_validation->set_rules('description', 'Description', 'trim');
-		$this->form_validation->set_rules('price', 'Price', 'required|trim|numeric');
-		$this->form_validation->set_rules('menu_number', 'Menu Number', 'required|trim|numeric');
+		//$this->form_validation->set_rules('price', 'Price', 'required|trim|numeric');
+		//$this->form_validation->set_rules('menu_number', 'Menu Number', 'required|trim|numeric');
 		
 		// If the validation worked
 		if ($this->form_validation->run())
@@ -233,7 +233,7 @@ class Restaurant extends CI_Controller
 				$update_array['category_id'] = $category_id;
 				$update_array['title'] = $this->input->get_post('title');
 				$update_array['price'] = $this->input->get_post('price');
-				$update_array['menu_number'] = $this->input->get_post('menu_number');
+				$update_array['menu_number'] = $this->input->get_post('menu_number')==''?10000:$this->input->get_post('menu_number');
 				$update_array['description'] = $this->input->get_post('description');
 				$update_array['popular'] = $this->input->get_post('popular')!='' ? $this->input->get_post('popular') : 0;
 				
@@ -246,7 +246,7 @@ class Restaurant extends CI_Controller
 				$insert_array['category_id'] = $category_id;
 				$insert_array['title'] = $this->input->get_post('title');
 				$insert_array['price'] = $this->input->get_post('price');
-				$insert_array['menu_number'] = $this->input->get_post('menu_number');
+				$insert_array['menu_number'] = $this->input->get_post('menu_number')==''?10000:$this->input->get_post('menu_number');
 				$insert_array['description'] = $this->input->get_post('description');
 				$insert_array['popular'] = $this->input->get_post('popular')!='' ? $this->input->get_post('popular') : 0;
 				
@@ -402,10 +402,12 @@ class Restaurant extends CI_Controller
 				$width = get_width($image_path);
 				$height = get_height($image_path);
 				
-				# Resize Image Now
-				$width > RESIZE_IF_PIXELS_LIMIT ? resize_image2($image_path, RESIZE_IMAGE_WIDTH, '', 'W') : '';
-				$height > RESIZE_IF_PIXELS_LIMIT ? resize_image2($image_path, '', RESIZE_IMAGE_HEIGHT, 'H') : '';
-				
+				if(strtolower($upload_detail['file_ext']) != '.png')
+				{
+					# Resize Image Now
+					$width > RESIZE_IF_PIXELS_LIMIT ? resize_image2($image_path, RESIZE_IMAGE_WIDTH, '', 'W') : '';
+					$height > RESIZE_IF_PIXELS_LIMIT ? resize_image2($image_path, '', RESIZE_IMAGE_HEIGHT, 'H') : '';
+				}
 			}
 			else
 			{

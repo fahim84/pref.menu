@@ -30,7 +30,7 @@ h1, h2, h3, h4, p, form, ul, li {
 	padding:0px;
 }
 h2 {
-	font-size:26px;
+	font-size:22px;
 	color:#ebebeb;
 	font-weight:bold;
 }
@@ -83,7 +83,7 @@ a {
 .header {
 	height:920px;
 	display:block;
-	background: url(../images/banner.jpg) no-repeat top center; 
+	/*background: url(../images/banner.jpg) no-repeat top center; */
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -201,6 +201,7 @@ nav ul li {
 	text-decoration:underline;
 }
 .TextField, .DropDown {
+	margin-top:3px;
 	border:1px solid #1a375a;
 	padding:10px;
 	color:#000;
@@ -224,7 +225,7 @@ input[type="file"] {
 	border:none;
 	color:#ffffff;
 	text-transform:uppercase;
-	font-size:20px;
+	font-size:30px;
 	padding:4px 12px;
 	   -moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -321,6 +322,7 @@ footer {
 	font-size:18px;
 	color:#cdcdcd;
 	margin-top:15px;
+	width: 100%;
 }
 footer a {
 	color:#cdcdcd;
@@ -428,14 +430,14 @@ footer a:hover {
 	top:0px;
 }
 .circle-options {
-	top:200px;
+	top:100px;
 	text-align:center;
 }
 .circle-options ul li {
 	display:inline-table;
 	width:350px;
 	height:348px;
-	margin:0px 15px;
+	margin:0px 60px;
 	padding-top:100px;
 	background:url(../images/circle.png) top left no-repeat;
 }
@@ -443,7 +445,7 @@ footer a:hover {
 	width:280px;
 }
 .circle-options input.Button {
-	margin-top:20px;
+	margin-top:10px;
 	background:#ec6461;
 }
 .circle-options input.Button:hover {
@@ -524,7 +526,7 @@ tr.BgTwo td {
 	width:700px;
 }
 .survey-items, .survey-fix {
-	min-height:200px;
+	min-height:185px;
 }
 .survey-fix {
 	width:480px;
@@ -977,7 +979,7 @@ h2.error {
 		width:95%;
 	}
 	.header {
-		background: url(../images/banner-tablet.jpg); 
+		/*background: url(../images/banner-tablet.jpg); */
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 	}
@@ -1109,7 +1111,8 @@ h2.error {
 		width:50px;
 	}
 	.circle-options {
-		top:5px;
+		top:10px;
+		min-height:420px;
 	}
 	
 	.login-box h2 {
@@ -1127,13 +1130,12 @@ h2.error {
 		width:95%;
 	}
 	.header {
-		background: url(../images/banner-mobile.jpg); 
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
+		background-image:none;
+		height:auto;
 	}
 	.login-box {
 		top:50px;
-		width:75%;
+		width:85%;
 	}
 	.register-form {
 		background:none;
@@ -1144,6 +1146,7 @@ h2.error {
 	.circle-options ul li {
 		width:270px;
 		height:268px;
+		padding-top:95px;
 		background:url(../images/circle-tablet.png) top left no-repeat;
 	}
 	.circle-options h2 {
@@ -1257,7 +1260,7 @@ h2.error {
 }
 .alert {
 	padding: 8px 35px 8px 14px;
-	margin-bottom: 20px;
+	margin-bottom: 5px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	background-color: #fcf8e3;
 	border: 1px solid #fbeed5;
@@ -1312,10 +1315,11 @@ h2.error {
 	padding-right:5px;
 }
 .special_comment_textbox{
-	border:1px solid #1a375a;
+	/*border:1px solid #1a375a;*/
 	padding:5px;
 	color:#000;
-	font-size:16px;
+	font-size:14px;
+	width:210px;
 	-webkit-transition: all 0.3s ease;
 	   -moz-transition: all 0.3s ease;
 	     -o-transition: all 0.3s ease;

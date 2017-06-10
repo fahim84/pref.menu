@@ -513,7 +513,7 @@ class Report_model extends CI_Model
 		$order_by['id'] = 'DESC';
 		$total_number_of_ratings = self::get_ratings($where_condition, $order_by, true);
 		//my_var_dump($total_number_of_ratings);
-		if($total_number_of_ratings < 10)
+		if($total_number_of_ratings < 2)
 		{
 			return false;
 		}
@@ -585,7 +585,7 @@ class Report_model extends CI_Model
 		
 		
 		# Get Staff Members data
-		$return_data['staff_data_heading'] = array("Staff Member's Name",'','');
+		$return_data['staff_data_heading'] = array("Most Popular Employee",'','');
 		
 		$sql = "SELECT COUNT(*) number_of_rating, COUNT(*) / $total_number_of_ratings * 100 percent, ratings_view.*
 				FROM ratings_view

@@ -50,7 +50,7 @@ class Report extends CI_Controller
 		# Get top staff member
 		$this->data['top_staff_member'] = $this->report_model->get_top_staff_member($restaurant_id,$start_date,$end_date);
 		
-		if($count_feedbacks > 4)
+		if($count_feedbacks > 1)
 		{
 			# Get top and low rated item
 			$top_low_item = $this->report_model->get_top_and_low_menu($restaurant_id,$start_date,$end_date);
@@ -487,7 +487,7 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setTitle("Pref.Menu Report");
 		
 		# Row 1
-		$this->excel->getActiveSheet()->getStyle("C8:L40")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$this->excel->getActiveSheet()->getStyle("C8:L15")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
 		
 		$this->excel->getActiveSheet()->setCellValue("A1", $data["report_heading"]);
@@ -500,14 +500,14 @@ class Report extends CI_Controller
 		//set aligment to center for that merged cell (A1 to D1)
 		$this->excel->getActiveSheet()->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
-		$this->excel->getActiveSheet()->getStyle("A1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E8E5E5");
+		//$this->excel->getActiveSheet()->getStyle("A1")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E8E5E5");
 		
 		$row = 3;
 		$this->excel->getActiveSheet()->setCellValue("B$row", $data["total_reviews"][0]);
 		$this->excel->getActiveSheet()->getStyle("B$row")->getFont()->setBold(true);
 		$this->excel->getActiveSheet()->getStyle("B$row")->getFont()->setSize(16);
 		$this->excel->getActiveSheet()->setCellValue("C$row", $data["total_reviews"][1]);
-		$this->excel->getActiveSheet()->getStyle("C$row")->getFont()->setBold(true)->setSize(16);//->getColor()->setRGB("green");
+		$this->excel->getActiveSheet()->getStyle("C$row")->getFont()->setBold(true)->setSize(16);
 		$this->excel->getActiveSheet()->getStyle("C$row")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
 		$row = 5;
@@ -523,7 +523,7 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, $row, $data["top_item"][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(5, $row, $data["top_item"][2]);
 		$this->excel->getActiveSheet()->getStyle("B$row")->getFont()->setBold(true);
-		$this->excel->getActiveSheet()->getStyle("C$row:F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("C$row:F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
 		$this->excel->getActiveSheet()->getStyle("F$row")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
 		$row = 7;
@@ -532,15 +532,15 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, $row, $data["low_item"][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(5, $row, $data["low_item"][2]);
 		$this->excel->getActiveSheet()->getStyle("B$row")->getFont()->setBold(true);
-		$this->excel->getActiveSheet()->getStyle("C$row:F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("C$row:F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
 		$this->excel->getActiveSheet()->getStyle("F$row")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		
 		$row = 9;
-		$this->excel->getActiveSheet()->mergeCells("C$row:D$row")->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
-		$this->excel->getActiveSheet()->mergeCells("E$row:F$row")->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
-		$this->excel->getActiveSheet()->mergeCells("G$row:H$row")->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
-		$this->excel->getActiveSheet()->mergeCells("I$row:J$row")->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
-		$this->excel->getActiveSheet()->mergeCells("K$row:L$row")->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
+		//$this->excel->getActiveSheet()->mergeCells("C$row:D$row")->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
+		//$this->excel->getActiveSheet()->mergeCells("E$row:F$row")->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
+		//$this->excel->getActiveSheet()->mergeCells("G$row:H$row")->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
+		//$this->excel->getActiveSheet()->mergeCells("I$row:J$row")->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
+		//$this->excel->getActiveSheet()->mergeCells("K$row:L$row")->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(1, $row, $data["question_header"][0]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, $row, $data["question_header"][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(4, $row, $data["question_header"][2]);
@@ -563,16 +563,16 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(9, $row, $data["cusotmer_experience_data"][4][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(10, $row, $data["cusotmer_experience_data"][5][0]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(11, $row, $data["cusotmer_experience_data"][5][1]);
-		$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("J$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("L$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("J$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("L$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
 		
 		$row = 12;
 		$this->excel->getActiveSheet()->getStyle("B$row")->getFont()->setBold(true)->setSize(16);
@@ -587,21 +587,21 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(9, $row, $data["order_speed_data"][4][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(10, $row, $data["order_speed_data"][5][0]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(11, $row, $data["order_speed_data"][5][1]);
-		$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("J$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("L$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("I$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("J$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("K$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("L$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
 		
 		$row = 14;
-		$this->excel->getActiveSheet()->mergeCells("C$row:D$row")->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
-		$this->excel->getActiveSheet()->mergeCells("E$row:F$row")->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
-		$this->excel->getActiveSheet()->mergeCells("G$row:H$row")->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
+		//$this->excel->getActiveSheet()->mergeCells("C$row:D$row")->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
+		//$this->excel->getActiveSheet()->mergeCells("E$row:F$row")->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("DDD9C3");
+		//$this->excel->getActiveSheet()->mergeCells("G$row:H$row")->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("E5E0EC");
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(1, $row, $data["come_again_data"][0]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(2, $row, "Yes");
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(4, $row, "No");
@@ -616,12 +616,12 @@ class Report extends CI_Controller
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(5, $row, $data["come_again_data"][2][1]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(6, $row, $data["come_again_data"][3][0]);
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(7, $row, $data["come_again_data"][3][1]);
-		$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
-		$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-		$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("F$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+		//$this->excel->getActiveSheet()->getStyle("G$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+		//$this->excel->getActiveSheet()->getStyle("H$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
 		
 		$row = 17;
 		$this->excel->getActiveSheet()->setCellValueByColumnAndRow(1, $row, $data["staff_data_heading"][0]);
@@ -641,11 +641,11 @@ class Report extends CI_Controller
 			$this->excel->getActiveSheet()->setCellValueByColumnAndRow(1, $row, $staff_data[0]);
 			$this->excel->getActiveSheet()->setCellValueByColumnAndRow(3, $row, $staff_data[1]);
 			$this->excel->getActiveSheet()->setCellValueByColumnAndRow(4, $row, $staff_data[2]);
-			$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
-			$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
+			//$this->excel->getActiveSheet()->getStyle("D$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("FDE9D9");
+			//$this->excel->getActiveSheet()->getStyle("E$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB("EAF1DD");
 			
 			$row_color = @$row_color == 'E5E0EC' ? 'DDD9C3' : 'E5E0EC';
-			$this->excel->getActiveSheet()->getStyle("B$row:C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB($row_color);
+			//$this->excel->getActiveSheet()->getStyle("B$row:C$row")->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB($row_color);
 			
 			$staff_data[3] = $staff_data[3] == '' ? 'employee.png' : $staff_data[3];
 			
@@ -670,6 +670,20 @@ class Report extends CI_Controller
 		
 		$this->excel->getActiveSheet()->setShowGridlines(false);
 		$this->excel->getActiveSheet()->getColumnDimension("B")->setWidth(40);
+		
+		$styleArray = array(
+			  'borders' => array(
+				  'allborders' => array(
+					  'style' => PHPExcel_Style_Border::BORDER_THIN
+				  )
+			  )
+		  );
+		
+		$this->excel->getActiveSheet()->getStyle(
+			'A1:' . 
+			$this->excel->getActiveSheet()->getHighestColumn() . 
+			$this->excel->getActiveSheet()->getHighestRow()
+		)->applyFromArray($styleArray);
 		
 		$filename="pref_menu_report.xls"; //save our workbook as this file name
 		header('Content-Type: application/vnd.ms-excel'); //mime type

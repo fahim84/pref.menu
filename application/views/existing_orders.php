@@ -6,31 +6,34 @@
 <section class="inner-page">
 	<div class="container" style="min-height:400px;">
     	<div class="content-page register-now menu-page" id="ShowForm">
-       	  <div class="fleft"></div>
+       	  <div class="fleft">
+			  <div class="title bigtitle">Select Order for Feedback</div>
+			  <form name="SelectFeebackOrderForm" id="SelectFeebackOrderForm" class="ac-custom ac-checkbox ac-checkmark" action="">
+				  <input type="hidden" name="temporary" id="temporary" value="0">
+				  <div class="feeback-option">
+					  <div style="width:200px;">
+						  <select name="Table" required id="Table" style="width:200px;height:45px;padding:5px;font-size:20px;" >
+							  <option value="">Select Table</option>
+							  <?php
+							  foreach(get_tables() as $Key => $Value)
+							  {
+								  $selected = $Table == $Key ? 'selected="selected"' : '';
+								  echo '<option value="'.$Key.'" '.$selected.' >'.$Value.'</option>';
+							  }
+							  ?>
+						  </select>
+					  </div>
+					  <div ><br><input type="submit" name="SubmitBtn" id="SubmitBtn" value="Submit" class="Button" style="background-color:#C30003;font-size: 22px;" /></div>
+					  <div class="clear"></div>
+				  </div>
+				  <div class="clear"></div>
+				  <span id="SelectTableError"></span>
+			  </form>
+		  </div>
           <div class="fright"><?php client_logo(); ?></div>
           <div class="clear"></div>
-          <div class="title bigtitle">Select Order for Feedback</div>
-          <form name="SelectFeebackOrderForm" id="SelectFeebackOrderForm" class="ac-custom ac-checkbox ac-checkmark" action="">
-          <input type="hidden" name="temporary" id="temporary" value="0">
-          <div class="feeback-option">
-          	<div style="width:200px;">
-          <select name="Table" required id="Table" style="width:200px;height:45px;padding:5px;font-size:20px;" >
-          	<option value="">Select Table</option>
-            <?php
-				foreach(get_tables() as $Key => $Value)
-				{
-					$selected = $Table == $Key ? 'selected="selected"' : '';
-					echo '<option value="'.$Key.'" '.$selected.' >'.$Value.'</option>';
-				}
-			?>
-          </select>
-          </div>
-          <div ><br><input type="submit" name="SubmitBtn" id="SubmitBtn" value="Submit" class="Button" /></div>
-          <div class="clear"></div>
-          </div>
-          <div class="clear"></div>
-          <span id="SelectTableError"></span>
-          </form>
+
+
 	<?php if (validation_errors()): ?>
     <div class="alert alert-danger">
     <?php echo validation_errors();?>
@@ -66,17 +69,18 @@
 					foreach($orders_query->result() as $row)
 					{
 						$order_id = $row->id;
-						$Table = $TablesArray[$row->table_number];
+						$Table = "Table $row->table_number";
 						$Customer = $row->customer_number;
 						
 						$Class = @$Class=='BgTwo' ? 'BgOne' : 'BgTwo';
 						
 						$order_items_query = $this->order_model->get_order_items($order_id);
+						
 				?>
             
             <table width="100%" cellpadding="5" cellspacing="2" >
             	<tr class="MenuCategory">
-                    <td><div class="title"><input onchange="select_single(<?php echo $order_id; ?>);" class="selected_ids" type="checkbox" name="selected_ids[]" id="selected_id_<?php echo $order_id; ?>" value="<?php echo $order_id; ?>"> Customer <?php echo $Customer; ?> @ <?php echo $Table; ?></div></td>
+                    <td><div class="title"><input onchange="select_single(<?php echo $order_id; ?>);" class="selected_ids" type="checkbox" name="selected_ids[]" id="selected_id_<?php echo $order_id; ?>" value="<?php echo $order_id; ?>"> <?php echo $Table; ?></div></td>
                 </tr>
                 
                 <tr class="MenuItem <?php echo $Class; ?>">
@@ -87,19 +91,22 @@
 					{
 						$image_url = $item->image == '' ? base_url().'images/no-dish.png' : base_url().UPLOADS.'/'.$item->image;
 						$image = base_url()."thumb.php?src=".$image_url."&w=100&h=100";
+						
+						$item->menu_number = ($item->menu_number == 10000 or $item->menu_number == 0) ? '' : '#'.$item->menu_number;
 						?>
                         <tr>
                           <td width="5%"><div style="padding-right:10px;"><a href="<?php echo $image_url; ?>" data-lightbox="roadtrip" data-title="<?php echo htmlspecialchars($item->title,ENT_QUOTES); ?>"><img title="<?php echo $item->title; ?>" src="<?php echo $image; ?>" alt="image" class="menu-dish menu-dish-flexible" /></a></div></td>
                           <td valign="top">
-                          <div class="title limit_title" title="<?php echo $item->title; ?>">#<?php echo $item->menu_number; ?> <?php echo $item->title; ?>&nbsp;<?php if($item->popular==1) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="Popular" /><?php } ?></div>
+                          <div class="title limit_title" title="<?php echo $item->title; ?>"><?php echo $item->menu_number; ?> <?php echo $item->title; ?>&nbsp;<?php if($item->popular==1) { ?>&nbsp;<img title="Popular" src="<?php echo base_url(); ?>images/1star.png" alt="Popular" /><?php } ?></div>
                           <div class="description"><?php echo $item->request_comment; ?></div>
-                          <div class="description price">AED <?php echo $item->price; ?> x <?php echo $item->quantity; ?></div></td>
+                          <div class="description price"><?php if($item->price > 0) { ?>AED <?php echo $item->price; ?> x <?php echo $item->quantity; ?><?php } ?>&nbsp;</div>
+                          </td>
                         </tr>
                     <?php } ?>
                     </tbody>
                     </table>
                     <div ><?php echo date('jS M, Y - g:i a',strtotime($row->date_created)); ?></div>
-                    <div><input type="button" name="SelectOrderBtn" id="SelectOrderBtn" data-id="<?php echo $order_id; ?>" class="Button" value="Start Feedback" /> <span><input type="button" class="Button" onClick="window.location.href='<?php echo base_url(); ?>order/edit_order/?order_id=<?php echo $order_id; ?>'"  value="Edit" /></span></div>
+                    <div><input type="button" name="SelectOrderBtn" id="SelectOrderBtn" data-id="<?php echo $order_id; ?>" class="Button" style="background-color:#C30003;font-size: 22px;" value="Start Feedback" /> <span><input type="button" class="Button" style="background-color:#C30003;font-size: 22px;" onClick="window.location.href='<?php echo base_url(); ?>order/edit_order/?order_id=<?php echo $order_id; ?>'"  value="Edit" /></span></div>
                     
 					</td>
                 </tr>	

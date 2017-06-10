@@ -15,7 +15,7 @@
     <?php $this->load->view('report-tabs',$this->data); ?>
     <div class="charts">
     <?php
-		if($count_feedbacks > 4)
+		if($count_feedbacks > 1)
 		{
 	?>
     	<div class="container">

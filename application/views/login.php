@@ -1,3 +1,4 @@
+
 <div class="container login-box" id="loginBox" align="center">
     <h2>Login</h2>
     <form name="login" id="login" method="post" action="<?php echo base_url(); ?>login">
@@ -39,6 +40,7 @@
         <div id="LoginMsg">&nbsp;</div>
         <div class="clear"></div>
     </form>
+
 </div>
 <div class="container login-box" id="forgetBox" style="display:none;">
     <h2>Forgot Password?</h2>
@@ -83,3 +85,10 @@ else
 	//console.log('Sorry! No HTML5 Local Storage support in your browser..');
 }
 </script>
+
+<style>
+    footer{
+        bottom: 0px;
+        position: absolute;
+    }
+</style>

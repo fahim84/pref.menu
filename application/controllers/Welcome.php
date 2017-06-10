@@ -28,6 +28,12 @@ class Welcome extends CI_Controller
 		$this->load->view('thankyou',$this->data);
 	}
 	
+	public function afterthankyou()
+	{
+		$this->data['Active'] = 'menu';
+		$this->load->view('thankyouafter',$this->data);
+	}
+	
 	public function about_us()
 	{
 		$this->data['Active'] = 'about-us';
@@ -52,6 +58,56 @@ class Welcome extends CI_Controller
 		my_var_dump('$this->db->database = '.$this->db->database);
 		
 		
+	}
+	
+	public function testemail() 
+	{
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		
+		$ci = get_instance(); // CI_Loader instance
+		$ci->load->config('email');
+		my_var_dump( $ci->config->item('allconfig'));
+		
+		$this->load->library('email');
+		$this->email->set_newline("\r\n");
+		
+		// Set to, from, message, etc.
+		$to[] = "volcano_ck@hotmail.com";
+		$to[] = "fahim@blazebuddies.com";
+		
+		$this->email->to($to);
+		
+		$this->email->from(SYSTEM_EMAIL);
+		$this->email->subject('Testing email from '.base_url());
+		$this->email->message("Testing email body <br>".json_encode($ci->config->item('allconfig'),JSON_PRETTY_PRINT));
+		
+		$result = $this->email->send();
+		my_var_dump( $result);
+		//my_var_dump( $this->email->print_debugger());
+	}
+	
+	public function testemail2() 
+	{
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+		
+		$this->load->library('email');
+		$this->email->set_newline("\r\n");
+		
+		// Set to, from, message, etc.
+		$to[] = "volcano_ck@hotmail.com";
+		$to[] = "fahim@blazebuddies.com";
+		
+		$this->email->to($to);
+		
+		$this->email->from(SYSTEM_EMAIL);
+		$this->email->subject('Testing email from '.base_url());
+		$this->email->message("Testing email body <br>");
+		
+		$result = $this->email->send();
+		my_var_dump( $result);
+		//my_var_dump( $this->email->print_debugger());
 	}
 
 }
