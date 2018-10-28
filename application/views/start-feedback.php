@@ -28,9 +28,16 @@ function googleTranslateElementInit() {
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         
-        <div class="fleft letusknow"><img src="<?php echo base_url(); ?>images/letusknow.png" alt="" /></div>
-        <div class="clear" style="height:20px;"></div>
+        <div class="fleft letusknow">
+            <img src="<?php echo base_url(); ?>images/letusknow.png" alt="" />
         </div>
+            <div class="clear"></div>
+        </div>
+        <div><h3 style="color: #4f4f4f;font-size: 22px;">7 questions for a chance to win 2,000 AED</h3></div>
+
+        <br>
+        <br>
+
 		<?php
         	if($menu_query->num_rows())
 			{
@@ -176,7 +183,7 @@ function googleTranslateElementInit() {
                 <textarea name="suggestion" id="suggestion" class="UserComment"></textarea>
             </div>
             <div class="survey-box3 margin-bottom">
-            	<h3>Receive a generous discount on your next visit <span class="description">(Optional)</span></h3>
+            	<h3>Enter into the Pref 1,000 AED prize draw <span class="description">(Optional)</span></h3>
                 <input type="text" autocomplete="off" name="name" id="name" class="TextField" placeholder="Enter your name" />
                 <input type="email" autocomplete="off" name="Email" id="Email" class="TextField" placeholder="Enter your email address" />
             </div>
@@ -223,45 +230,6 @@ $(document).ready(function(){
 	click: function(score, evt) { $('#raty3-result').html('<img src="<?php echo base_url(); ?>images/face'+score+'.png" />');}
 	});
 	
-	/*$('.raty').raty({
-		scoreName:'rates[]',
-		number: 5,
-		single: true,
-		click: function(score, evt) {$('.raty').raty('click', score);},
-		iconRange: [
-			{ range: 1, on: '<?php echo base_url(); ?>images/face-a.png', off: '<?php echo base_url(); ?>images/face-a-off.png' },
-			{ range: 2, on: '<?php echo base_url(); ?>images/face-b.png', off: '<?php echo base_url(); ?>images/face-b-off.png' },
-			{ range: 3, on: '<?php echo base_url(); ?>images/face-c.png', off: '<?php echo base_url(); ?>images/face-c-off.png' },
-			{ range: 4, on: '<?php echo base_url(); ?>images/face-d.png', off: '<?php echo base_url(); ?>images/face-d-off.png' },
-			{ range: 5, on: '<?php echo base_url(); ?>images/face-e.png', off: '<?php echo base_url(); ?>images/face-e-off.png' }
-		]
-	});
-	$('.raty2').raty({
-		scoreName:'customerExp',
-		number: 5,
-		single: true,
-		click: function(score, evt) {$('.raty2').raty('click', score);},
-		iconRange: [
-			{ range: 1, on: '<?php echo base_url(); ?>images/face-a.png', off: '<?php echo base_url(); ?>images/face-a-off.png' },
-			{ range: 2, on: '<?php echo base_url(); ?>images/face-b.png', off: '<?php echo base_url(); ?>images/face-b-off.png' },
-			{ range: 3, on: '<?php echo base_url(); ?>images/face-c.png', off: '<?php echo base_url(); ?>images/face-c-off.png' },
-			{ range: 4, on: '<?php echo base_url(); ?>images/face-d.png', off: '<?php echo base_url(); ?>images/face-d-off.png' },
-			{ range: 5, on: '<?php echo base_url(); ?>images/face-e.png', off: '<?php echo base_url(); ?>images/face-e-off.png' }
-		]
-	});
-	$('.raty3').raty({
-		scoreName:'OrderSpeed',
-		number: 5,
-		single: true,
-		click: function(score, evt) {$('.raty3').raty('click', score);},
-		iconRange: [
-			{ range: 1, on: '<?php echo base_url(); ?>images/face-a.png', off: '<?php echo base_url(); ?>images/face-a-off.png' },
-			{ range: 2, on: '<?php echo base_url(); ?>images/face-b.png', off: '<?php echo base_url(); ?>images/face-b-off.png' },
-			{ range: 3, on: '<?php echo base_url(); ?>images/face-c.png', off: '<?php echo base_url(); ?>images/face-c-off.png' },
-			{ range: 4, on: '<?php echo base_url(); ?>images/face-d.png', off: '<?php echo base_url(); ?>images/face-d-off.png' },
-			{ range: 5, on: '<?php echo base_url(); ?>images/face-e.png', off: '<?php echo base_url(); ?>images/face-e-off.png' }
-		]
-	});*/
 
 });
 

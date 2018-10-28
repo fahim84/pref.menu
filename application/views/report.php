@@ -65,7 +65,7 @@
             	<div class="employee-month">
                 	
                     <div class="chart-box">
-                    <h2>Which member of staff did you like?</h2>
+                    <h2>Which staff member served you?</h2>
                     <?php
 					$image_url = $top_staff_member->image == '' ? base_url().'images/employee.png' : base_url().UPLOADS.'/'.$top_staff_member->image;
 					$image = $top_staff_member->image == '' ? $image_url : base_url()."thumb.php?src=".$image_url."&w=100&h=100";
