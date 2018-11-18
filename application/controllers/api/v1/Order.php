@@ -153,7 +153,7 @@ class Order extends REST_Controller {
         }
 
 
-        if($insert_data['come_again'] == 'No' || $insert_data['come_again'] < 3 || $insert_data['customer_experience'] < 3) // 2 means NO, Customer will not come again
+        if(@$insert_data['come_again'] == 'No' || @$insert_data['come_again'] < 3 || @$insert_data['customer_experience'] < 3) // 2 means NO, Customer will not come again
         {
             $negative_feedback = true;
         }
